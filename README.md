@@ -1,2 +1,6 @@
-# NNBasic
-Some practical code for math and NN.
+# Hack the NN
+
+This is my learning memo of http://karpathy.github.io/neuralnets/
+
+ 
+
