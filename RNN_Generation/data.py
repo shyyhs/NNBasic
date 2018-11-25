@@ -2,11 +2,15 @@ from __future__ import unicode_literals, print_function, division
 
 import os
 import sys
+import random
+import time
 
 import glob
 import string
 import unicodedata
 from io import open
+
+import torch
 
 from globalVar import *
 
@@ -56,7 +60,7 @@ def randomInputSample():
 def tensorCategory(category):
     li = categoryType.index(category)
     tensor = torch.zeros(1,categoryN)
-    tensor[li] = 1
+    tensor[0][li] = 1
     return tensor
     
 def tensorInput(line):
@@ -69,7 +73,7 @@ def tensorInput(line):
 def tensorTarget(line):
     target = [letterLst.find(c) for c in line[1:]]
     target.append(letterN-1)
-    return torch.tensor(target, dtype = int64)
+    return torch.tensor(target, dtype = torch.int64)
          
     
         
