@@ -40,11 +40,6 @@ def getCate():
         categoryData[categoryTmp]=readLines(filename)
     categoryN = len(categoryType)
         
-        
-
-
-
-
 if (__name__!="__main__"):
     #This function is used by other functions, not test
     print("Data module")
