@@ -44,14 +44,14 @@ def trainStep(category, input, target):
     
 
 #Parameters
-iterN = 10000
+iterN = 100000
 lr = 0.005
 
 hiddenSize = 128
 rnn = RNN(letterN, hiddenSize, letterN) 
 criterion = nn.NLLLoss()
 
-printN = 5000
+printN = iterN/10 
 plotN = 500
 
 def training():
@@ -71,10 +71,8 @@ def training():
     
 
 if (__name__!="__main__"):
-    print(" Training module")
+    print("Training module")
 
 if (__name__=="__main__"):
     print ("Training begins")
     _, lossLst = training()
-    
-
