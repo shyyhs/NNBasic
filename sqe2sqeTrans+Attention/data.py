@@ -31,13 +31,24 @@ class Lang:
         print (self.word2index)
         print (self.index2word)
 
+# https://docs.python.org/2/library/unicodedata.html
+# http://www.fileformat.info/info/unicode/category/index.htm
+def unicodeToAscii(s):
+    return ''.join(c for c in unicodedata.normalize('NFD',s)
+        if codedata.category(c)!='Mn')
+
+def normalizeString(s):
+    s = unicodeToAscii(s.lower().strip())
+    
 
 
 if (__name__=="__main__"):
     print ("From Data.py begins") 
+    """
     inputLang = Lang("Chinese")
     inputLang.addSentence("There is a a dog !")
     inputLang.testPrint()
+    """
     
 
 if (__name__!="__main__"):
