@@ -15,8 +15,13 @@ import torch
 import torch.nn as nn
 from torch import optim
 import torch.nn.functional as F
-
+SOSToken = 0
+EOSToken = 1
+MAXLEN = 10
+engPrefix = ("i am", "i m", "he is", "he s", "she is", "she s","you are",
+          "you re", "we are", "we re","they are", "they re")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 if (__name__=="__main__"):
     print("gobalSetting begins")

@@ -1,7 +1,5 @@
 from globalSetting import *
 
-SOSToken = 0
-EOSToken = 1
 
 #Level 3.5
 class Lang:
@@ -58,7 +56,6 @@ def readLangs(lang1,lang2,reverse=False):
         outputLang = Lang(lang2)
     return inputLang,outputLang,pairs
 
-MAXLEN = 10
 engPrefix = ("i am", "i m", "he is", "he s", "she is", "she s","you are",
         "you re", "we are", "we re","they are", "they re")
 def filterPair(p):
