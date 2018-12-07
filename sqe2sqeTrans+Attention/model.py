@@ -58,7 +58,7 @@ class AttnDecoderRNN(nn.Module):
         embedded = self.embedding(input)
         embedded = self.dropout(embedded)
         attnWeight = self.attn(torch.cat((embedded[0],hidden[0]),1))
-        attnWeight = self.softmax(attn,dim=1)
+        attnWeight = F.softmax(attn,dim=1)
         attn = torch.bmm(attnWeight.unsqueeze(0),encoderOutput.unsqueeze(0))
         attnComb = torch.cat((embedded[0],attn[0]),1)
         output = self.attnCombine(attnComb).unsqueeze(0)
