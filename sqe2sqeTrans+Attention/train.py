@@ -41,3 +41,32 @@ def train(srcTensor,tgtTensor,encoder,decoder,encoderOpt,decoderOpt,criterion,ma
     decoderOpt.step()
     return loss.item()/tgtLen
     
+def trainIters(encoder,decoder,iterN,printEvery=1000,plotEvery=100,lr=0.01):
+    startTime = time.time()
+    plotLosses = []
+    plotLossTotal=0
+    printLossTotal=0
+    encoderOpt = optim.SGD(encoder.parameters(),lr=lr)
+    decoderOpt = optim.SGD(decoder.parameters(),lr=lr)
+    criterion = nn.NLLLoss()
+    trainPairs = [pair2Tensor(random.choice(pairs)) for i in range(iterN)]
+    for i in range(iterN):
+        trainPair = trainPairs[i]
+        srcTensor = trainPair[0]
+        tgtTensor = trainPair[1]
+        loss = train(srcTensor,tgtTensor,encoder,decoder,encoderOpt,decoderOpt,\
+                criterion)
+        printLossTotal+=loss
+        plotLossTotal+=loss
+        if ((i+1)%printEvery==0):
+            printLossAvg = printLossTotal/printEvery
+            printLossTotal=0
+            print ("{} {} {:.4f}".format(timeSince(startTime),i+1,printLossAvg))
+        if ((i+1)%plotEvery==0):
+            plotLossAvg = plotLossTotal/plotEvery
+            plotLosses.append(plotLossAvg)
+            plotLossTotal=0
+    showPlot(plotLosses)
+
+
+
