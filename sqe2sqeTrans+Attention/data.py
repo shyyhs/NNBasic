@@ -56,8 +56,6 @@ def readLangs(lang1,lang2,reverse=False):
         outputLang = Lang(lang2)
     return inputLang,outputLang,pairs
 
-engPrefix = ("i am", "i m", "he is", "he s", "she is", "she s","you are",
-        "you re", "we are", "we re","they are", "they re")
 def filterPair(p):
     return ((len(p[0].split(' '))<MAXLEN) and (len(p[1].split(' '))<MAXLEN) and p[1].startswith(engPrefix))
 
@@ -77,6 +75,7 @@ def prepareData(lang1,lang2,reverse=False):
     print (inputLang.name, inputLang.wordN)
     print (outputLang.name, outputLang.wordN)
     return inputLang,outputLang,pairs
+
 
 
 
