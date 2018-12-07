@@ -15,6 +15,12 @@ import torch
 import torch.nn as nn
 from torch import optim
 import torch.nn.functional as F
+import numpy as np
+
+#import matplotlib.pyplot as plt
+#plt.switch_backend('agg')
+#import matplotlib.ticker as ticker
+
 SOSToken = 0
 EOSToken = 1
 MAXLEN = 10
