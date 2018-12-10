@@ -23,7 +23,6 @@ def train(srcTensor,tgtTensor,encoder,decoder,encoderOpt,decoderOpt,criterion,ma
     decoderInput = torch.tensor([[SOSToken]],device=device)
     decoderHidden=encoderHidden
     teacherForcing=True if random.random()< teacherForcingRatio else False
-    teacherForcing = True
     if (teacherForcing):
         for di in range(tgtLen):
             decoderOutput,decoderHidden,decoderAttn = decoder(decoderInput,\

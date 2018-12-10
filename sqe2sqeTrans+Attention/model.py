@@ -8,7 +8,8 @@ class EncoderRNN(nn.Module):
         self.embedding = nn.Embedding(inputSize,hiddenSize)
         self.gru = nn.GRU(hiddenSize,hiddenSize)
     def forward(self,input,hidden):
-        embedded = self.embedding(input).view(1,1,-1)
+        embedded = self.embedding(input)
+        embedded = embedded.view(1,1,-1)
         output, hidden = self.gru(embedded,hidden)
         return output,hidden
     def initHidden(self):
@@ -57,14 +58,24 @@ class AttnDecoderRNN(nn.Module):
     def forward(self,input,hidden,encoderOutput):
         embedded = self.embedding(input).view(1,1,-1)
         embedded = self.dropout(embedded)
+        print ("Embedded shape:{}".format(embedded.size()))
         attnWeight = self.attn(torch.cat((embedded[0],hidden[0]),1))
+        print ("attnWeight shape:{}".format(attnWeight.size()))
         attnWeight = F.softmax(attnWeight,dim=1)
+        print ("attnWeight shape:{}".format(attnWeight.size()))
         attn = torch.bmm(attnWeight.unsqueeze(0),encoderOutput.unsqueeze(0))
+        print ("encoderOutput shape:{}".format(encoderOutput.size()))
+        print ("attn shape:{}".format(attn.size()))
         attnComb = torch.cat((embedded[0],attn[0]),1)
+        print ("attnComb shape:{}".format(attnComb.size()))
         output = self.attnCombine(attnComb).unsqueeze(0)
+        print ("attnCombine shape:{}".format(output.size()))
         output = self.relu(output)
         output,hidden = self.gru(output,hidden)
+
+        print ("output shape:{}".format(output.size()))
         output = F.log_softmax(self.out(output[0]),dim=1)
+        print ("final output shape:{}".format(output.size()))
         return output,hidden,attnWeight
     def initHidden(self):
         return torch.zeors(1,1,self.hiddenSize,device=device)
