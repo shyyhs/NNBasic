@@ -2,4 +2,5 @@
 .ipy*
 *swp
 *pyc
+**/data/*
 
